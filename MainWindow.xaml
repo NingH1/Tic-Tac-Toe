@@ -1,0 +1,133 @@
+﻿<!--
+    Application Name: Tic Tac Toe Game
+    Description: This is a simple WPF application for playing a two-player Tic Tac Toe game.
+    Creation Date: 2024-10-12
+    Last Modified: 2024-10-15
+    Created by: Ning Han
+    Last Modified by: Ning Han
+-->
+<Window x:Class="Assingment2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assingment2"
+        mc:Ignorable="d"
+        Title="Clint's Tic Tac Toe" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+	<!-- Grid layout for the main window -->
+	<Grid>
+		<!-- Define row definitions for organizing content vertically -->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40"/>
+			<!-- Row for the game title -->
+			<RowDefinition Height="40"/>
+			<!-- Row for player name input -->
+			<RowDefinition Height="40"/>
+			<!-- Row for current player display -->
+			<RowDefinition/>
+			<!-- Main area for the game board and score -->
+		</Grid.RowDefinitions>
+
+		<!-- Define column definitions for organizing content horizontally -->
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<!-- Column for player X name and board cells -->
+			<ColumnDefinition/>
+			<!-- Column for player O name and board cells -->
+			<ColumnDefinition/>
+			<!-- Column for game board cells -->
+			<ColumnDefinition/>
+			<!-- Column for scores and control buttons -->
+		</Grid.ColumnDefinitions>
+
+		<!-- Game Title Label -->
+		<Label Name="gameTitleLbl" Grid.Row="0" Grid.Column="0" Content="TIC TAC TOE"
+               HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+
+		<!-- Player Name Labels -->
+		<Label Name="xPlayerNameLbl" Grid.Row="1" Grid.Column="0" Content="X Player"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+		<Label Name="oPlayerNameLbl" Grid.Row="1" Grid.Column="1" Content="O Player"
+               HorizontalAlignment="Left" VerticalAlignment="Center" TabIndex="1"/>
+		<Label Name="currentPlayerLbl" Grid.Row="2" Grid.Column="1" Content="Current Player "
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+		<!-- Player Name TextBoxes -->
+		<TextBox Name="xPlayerNameTxtBox" Grid.Row="1" Grid.Column="0" HorizontalAlignment="center"
+                 VerticalAlignment="Center" Width="100" ToolTip="Enter the name of player X"/>
+		<TextBox Name="oPlayerNameTxtBox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="center"
+                 VerticalAlignment="Center" Width="100" ToolTip="Enter the name of player O"
+                 RenderTransformOrigin="0.836,0.591"/>
+		<TextBox Name="currentPlayerTxtBox" Grid.Row="2" Grid.Column="1" Text="X"
+                 HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="100,0,0,0"
+                 ToolTip="Shows the current player"/>
+
+		<!-- Main Grid for the Tic Tac Toe Game Board -->
+		<Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="10" Background="Yellow">
+			<!-- Define rows for the game board buttons -->
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<!-- Define columns for the game board buttons -->
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<!-- Tic Tac Toe Game Board Buttons with ToolTips -->
+			<!-- First Row Buttons -->
+			<Button Name="btn00" Grid.Row="0" Grid.Column="0" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="3" ToolTip="Click to mark this cell"/>
+			<Button Name="btn01" Grid.Row="0" Grid.Column="1" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="4" ToolTip="Click to mark this cell"/>
+			<Button Name="btn02" Grid.Row="0" Grid.Column="2" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="5" ToolTip="Click to mark this cell"/>
+
+			<!-- Second Row Buttons -->
+			<Button Name="btn10" Grid.Row="1" Grid.Column="0" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="6" ToolTip="Click to mark this cell"/>
+			<Button Name="btn11" Grid.Row="1" Grid.Column="1" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="7" ToolTip="Click to mark this cell"/>
+			<Button Name="btn12" Grid.Row="1" Grid.Column="2" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="8" ToolTip="Click to mark this cell"/>
+
+			<!-- Third Row Buttons -->
+			<Button Name="btn20" Grid.Row="2" Grid.Column="0" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="9" ToolTip="Click to mark this cell"/>
+			<Button Name="btn21" Grid.Row="2" Grid.Column="1" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="10" ToolTip="Click to mark this cell"/>
+			<Button Name="btn22" Grid.Row="2" Grid.Column="2" FontSize="50" Margin="5"
+                    Click="Button_Click" TabIndex="11" ToolTip="Click to mark this cell"/>
+		</Grid>
+
+		<!-- Score Labels -->
+		<Label Grid.Column="3" Content="Score" HorizontalAlignment="Left" Margin="10,10,0,0"
+               Grid.Row="3" VerticalAlignment="Top"/>
+		<Label Grid.Column="3" Content="X" HorizontalAlignment="Left" Margin="10,36,0,0"
+               Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-0.391,0.335" Width="39"/>
+		<Label Grid.Column="3" Content="O" HorizontalAlignment="Left" Margin="10,67,0,0"
+               Grid.Row="3" VerticalAlignment="Top"/>
+
+		<!-- Score Display TextBoxes -->
+		<TextBox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Margin="54,36,0,0"
+                 VerticalAlignment="Top" Width="60" IsReadOnly="True" Name="xScoreTxtBox"
+                 TextWrapping="Wrap" ToolTip="Displays the score of player X" TabIndex="12"/>
+		<TextBox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Margin="54,71,0,0"
+                 VerticalAlignment="Top" Width="60" IsReadOnly="True" Name="oScoreTxtBox"
+                 TextWrapping="Wrap" ToolTip="Displays the score of player O" TabIndex="13"/>
+
+		<!-- Control Buttons (Reset and Exit) -->
+		<Button Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Margin="29,198,0,0"
+                VerticalAlignment="Top" Height="33" Width="131" Content="_Reset"
+                Click="ResetGame_Click" ToolTip="Click to reset the game and clear scores" TabIndex="14"/>
+		<Button Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Margin="30,252,0,0"
+                VerticalAlignment="Top" Height="38" Width="130" Content="E_xit"
+                Click="ExitGame_Click" ToolTip="Click to exit the game" TabIndex="15"/>
+	</Grid>
+</Window>
